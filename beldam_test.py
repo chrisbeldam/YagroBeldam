@@ -11,7 +11,7 @@ class Workers:
         self.required_blocks = required_blocks
         self.construction_time = construction_time
         self.worker_partner = worker_partner  # opposite worker
-        self.timeTick = construction_time  # works like a small clock
+        self.timeTick = construction_time  # works like a running clock
 
     # Main function to check pieces on belt and then assemble P Components
     def start_belt(self, position):
