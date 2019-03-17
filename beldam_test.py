@@ -102,8 +102,18 @@ class ConveyorBelt:
         length = input(
             f'Please enter the length of the conveyorbelt (bigger than 0): ')
         length = int(length)
-    stop_time = int(
-        input(f'How many seconds would you like the workers to take to build P?: '))
+    stop_time = input(
+        f'How many seconds would you like the workers to take to build P?: ')
+    if stop_time.isalpha():
+        stop_time = input(
+            f'Please enter the time it takes workers to build (bigger than 0): ')
+        stop_time = int(stop_time)
+    else:
+        stop_time = int(stop_time)
+    while stop_time < 1:
+        stop_time = input(
+            f'Please enter the time it takes workers to build must be at least 1: ')
+        stop_time = int(stop_time)
 
     def __init__(self, components, statistics, worker_positions):
         self.worker_positions = [ConveyorPosition('')] * worker_positions
@@ -113,11 +123,12 @@ class ConveyorBelt:
 
     def create_workers(worker_positions, stop_time=stop_time):
         workers = {}  # Create empty worker object
-        for w in range(len(worker_positions)):  # for each position create pairs of workers
-            workers[w] = Workers(f'W{w}',
+        # for each position create pairs of workers
+        for w in range(len(worker_positions)):
+            workers[w] = Workers(f'Worker {w}',
                                  ['A', 'B'],
                                  stop_time,
-                                 Workers(f'P{w}',
+                                 Workers(f'Partner {w}',
                                          ['A', 'B'],
                                          stop_time))
         return workers
